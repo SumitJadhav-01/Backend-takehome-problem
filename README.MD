@@ -253,6 +253,8 @@ This module contains functions that interact with the PubMed API to:
 The module uses **requests** for API calls and **xml.etree.ElementTree** for XML parsing.
 
 This file interacts with PubMed’s API, fetches data about research papers, parses the data, and saves the results into a CSV.
+
+
 Import Statements
 
 
@@ -260,7 +262,8 @@ import requests
 import csv
 import re
 import xml.etree.ElementTree as ET
-from typing import List, Dict, Optional         
+from typing import List, Dict, Optional
+
 import requests: Imports the requests library, which allows you to send HTTP requests (like GET or POST requests) to access external APIs like PubMed’s API.
 
 import csv: Imports the csv module, which is used to read and write CSV (Comma Separated Values) files. It allows saving paper data into a .csv file.
