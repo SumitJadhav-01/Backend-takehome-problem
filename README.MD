@@ -75,121 +75,104 @@ Retrieves paper details with the get_paper_details function.
 
 Saves results to a file using save_csv or displays them on the console.
 
+
 ##### `INSTALLATION AND EXECUTION INSTRUCTIONS`
+
+
 To execute the provided Python scripts (pubmed_fetcher.py and cli.py), follow the step-by-step guide below.
 - 1. Prerequisites
 Python Installed: Ensure you have Python 3.6 or later installed on your system. You can download it from python.org.
 
 Pip Installed: Pip usually comes with Python. You can verify by running:
-`pip --version`
+```
+pip --version
+
+```
 Internet Connection: Required for fetching data from PubMed.
 - 2. Setting Up the Project
 1. Clone the Repository
 ```
- git clone https://github.com/your-username/pubmed-fetcher.git
- ```
-cd pubmed-fetcher
-
-- 3. Install Required Python Packages
+ git clone https://github.com/SumitJadhav-01/Backend-takehome-problem.git
+ 
+ cd  Backend-takehome-problem
+ 
+ cd pubmed_fetcher
+```
+- 3. Install Dependencies:
 The scripts rely on the requests library for making HTTP requests. Install it using pip:
-pip install requests
-If you plan to manage dependencies more robustly, consider using a virtual environment:
-#Create a virtual environment
+Now, run the following command to install the dependencies listed in your pyproject.toml:
 ```
-python -m venv venv
-```
-#Activate the virtual environment
-
-#On Windows:
-```
-venv\Scripts\activate
-```
-#On macOS/Linux:
-```
-source venv/bin/activate
-```
-#Install dependencies within the virtual environment
-```
-pip install requests
+poetry install
 ```
 - 4. Executing the Scripts
-The cli.py script is the main entry point that utilizes functions from pubmed_fetcher.py to fetch and display or save PubMed articles based on a search query.
+ After the installation, you can execute the get-papers-list command from the command line. Poetry will automatically use the cli.py script and pass the arguments you provide:
 *a. Basic Usage*
 To fetch papers related to a specific query and display them in the console:
 
  ```
-python cli.py "your search query"
+poetry run get-papers-list "your search query"
 ```
 Example:
  
-python cli.py "cancer research"
-
+poetry run get-papers-list "machine learning" 
 *b. Saving Results to a CSV File*
 To save the fetched papers to a CSV file, use the -f or --file option followed by the desired filename.
 
  ```
-python cli.py "your search query" -f results.csv
+poetry run get-papers-list "your search query" -f <filename>.csv
 ```
 Example:
  
-python cli.py "machine learning in healthcare" -f ml_healthcare_papers.csv
+poetry run get-papers-list "machine learning" -f results.csv
+
 *c. Enabling Debug Mode*
 For more detailed logging (useful for troubleshooting), enable debug mode with the -d or --debug flag.
 
- ```
-python cli.py "your search query" -d
+```
+poetry run get-papers-list "your search query"-d
 ```
 Example:
  
-python cli.py "genomics" -d
-
+poetry run get-papers-list "genomics" -d
 *d. Combining Options*
 You can combine options to save results to a file and enable debug mode simultaneously.
 
  ```
-python cli.py "your search query" -f output.csv -d
+poetry run get-papers-list "your search query" -f output.csv -d
 ```
 Example:
 
- 
-python cli.py "CRISPR technology" -f crispr_papers.csv -d
+poetry run get-papers-list  "CRISPR technology" -f crispr_papers.csv -d
 *e. Full Command Syntax*
 ```
-python cli.py <query> [-f FILE] [-d]
+poetry run get-papers-list query [-f FILE] [-d]
 ```
 query: (Required) The search term for PubMed.
 
-`-f, --file:` (Optional) Specify the filename to save the results as a CSV.
+-f, --file: (Optional) Specify the filename to save the results as a CSV.
 
-`-d, --debug:` (Optional) Enable debug mode for detailed logs.
+-d, --debug: (Optional) Enable debug mode for detailed logs.
 
 - 5. Example Workflow
 Let's go through a complete example where we search for papers related to "artificial intelligence in medicine" and save the results to a file named ai_medicine_papers.csv with debug logging enabled.
 *a. Run the Command*
 ```
-python cli.py "artificial intelligence in medicine" -f ai_medicine_papers.csv -d
+poetry run get-papers-list "artificial intelligence in medicine" -f ai_medicine_papers.csv -d
 ```
 *b. Expected Output*
 Console Output: Detailed logs due to debug mode, including information about fetching IDs and paper details.
 
 CSV File: A file named ai_medicine_papers.csv will be created in the project directory containing the fetched paper details with the following columns:
 
-PMID
-Title
-Date
-Authors
-Companies
-Email
+PMID,
+Title,
+Date,
+Authors,
+Companies,
+Email,
+
 *c. Viewing the Results*
-Open the ai_medicine_papers.csv file using any spreadsheet application (e.g., Microsoft Excel, Google Sheets) or a text editor to view the fetched PubMed articles.
-- 6. Troubleshooting
-Module Not Found Error: Ensure both pubmed_fetcher.py and cli.py are in the same directory. Also, verify that you're running the command from within that directory.
-
-Missing Dependencies: If you encounter issues related to missing Python packages, ensure you've installed all required packages using pip.
-
-Network Issues: Since the scripts fetch data from the internet, ensure you have a stable internet connection. Also, check if your firewall or network settings are blocking HTTP requests to PubMed's API.
-
-Invalid Query Results: If no papers are found, try refining your search query for better results.
+Open the ai_medicine_papers.csv file using any spreadsheet application (e.g., Microsoft Excel, Google Sheets) or a text editor to view the fetched PubMed articles
 ##### `Tools and Libraries Used`
 1. Requests Library
 
