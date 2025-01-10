@@ -73,7 +73,7 @@ Retrieves paper details with the get_paper_details function.
 Saves results to a file using save_csv or displays them on the console.
 
 
-##### `INSTALLATION AND EXECUTION INSTRUCTIONS`
+#### `INSTALLATION AND EXECUTION INSTRUCTIONS`
 
 
 To execute the provided Python scripts (pubmed_fetcher.py and cli.py), follow the step-by-step guide below.
