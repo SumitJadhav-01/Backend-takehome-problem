@@ -448,6 +448,7 @@ if affiliation and not re.search(r"university|institute", affiliation, re.IGNORE
 paper["Authors"].append(author.findtext("LastName")): Adds the author's last name to the Authors list.
 
 paper["Companies"].append(affiliation): Adds the affiliation to the Companies list.
+```
         # Extract corresponding author email
 
 corresponding = article.find(".//Author[CorrespondingAuthor='Y']")
@@ -455,7 +456,7 @@ if corresponding is not None:
     email = corresponding.findtext("AffiliationInfo/AuthorEmail")
     if email:
         paper["Email"] = email
-
+```
 corresponding = article.find(".//Author[CorrespondingAuthor='Y']"): Finds the corresponding author (the one marked with CorrespondingAuthor="Y").
 
 if corresponding is not None:: Checks if a corresponding author is found.
@@ -463,10 +464,11 @@ if corresponding is not None:: Checks if a corresponding author is found.
 email = corresponding.findtext("AffiliationInfo/AuthorEmail"): Extracts the email of the corresponding author.
 
 if email:: If an email is found, it adds the email to the dictionary.
+```
 papers.append(paper)
 
 return papers
-
+```
 papers.append(paper): Adds the paper’s details to the papers list.
 
 return papers: Returns the list of all papers' details.
@@ -481,13 +483,13 @@ This script serves as the command-line interface for interacting with the `pubme
 
 The script is designed to be executed from the command line with various options for flexibility.
 This script handles user input from the command line, invokes functions from pubmed_fetcher.py, and displays or saves the results.
-
+```
 Import Statements
 import argparse 
 import logging
 from pubmed_fetcher import fetch_ids, get_paper_details, save_csv
 from typing import Optional
-
+```
 import argparse: Imports the argparse module, which allows us to handle command-line arguments.
 
 import logging: Imports the logging module, which helps with debugging and printing log messages.
@@ -495,12 +497,15 @@ import logging: Imports the logging module, which helps with debugging and print
 from pubmed_fetcher import ...: Imports the functions from pubmed_fetcher.py.
 
 from typing import Optional: Imports the Optional type hint from typing to indicate that a value might be None.
+
 setup_logging Function
+```
 def setup_logging(debug: bool) -> None:
     if debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
         logging.basicConfig(level=logging.INFO)
+```
 
 def setup_logging(debug: bool) -> None:: Defines the function setup_logging, which sets up logging based on whether debugging is enabled.
 
@@ -508,14 +513,14 @@ logging.basicConfig(level=logging.DEBUG): Sets the logging level to DEBUG if deb
 
 logging.basicConfig(level=logging.INFO): If debugging is not enabled, it logs at the INFO level, which provides less verbose information.
 main Function
-
+```
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fetch papers from PubMed based on a query.")
     parser.add_argument("query", type=str, help="PubMed search query")
     parser.add_argument("-f", "--file", type=str, help="File to save results", default=None)
     parser.add_argument("-d", "--debug", action="store_true", help="Enable debug mode")
     args = parser.parse_args()
-
+```
 def main() -> None:: Defines the main function, which will run the core logic of the script.
 
 parser = argparse.ArgumentParser(description="..."): Initializes an argument parser that will handle command-line arguments.
@@ -527,42 +532,48 @@ parser.add_argument("-f", "--file", ...): Defines the optional argument -f (file
 parser.add_argument("-d", "--debug", ...): Defines the optional argument -d (enables debug mode).
 
 args = parser.parse_args(): Parses the arguments provided by the user when running the script.
+```
 if not args.query:
     print("Error: Query is missing!")
     return
-
+```
 if not args.query:: Checks if the query argument was provided. If not, it prints an error message and stops the program.
+```
 setup_logging(args.debug)
 logging.debug(f"Fetching papers for query: {args.query}")
-
+```
 setup_logging(args.debug): Calls the setup_logging function to configure logging based on the debug flag.
 
 logging.debug(...): Logs a debug message showing the search query.
+```
 pubmed_ids = fetch_ids(args.query)
 if len(pubmed_ids) == 0:
     print("No papers found.")
     return
-
+```
 pubmed_ids = fetch_ids(args.query): Calls fetch_ids to get the PubMed IDs for the query.
 
 if len(pubmed_ids) == 0:: Checks if no IDs were returned. If there are no results, it prints a message and stops.
+```
 papers = get_paper_details(pubmed_ids)
-
+```
 papers = get_paper_details(pubmed_ids): Calls get_paper_details to fetch the details for the papers based on the PubMed IDs.
+```
 if args.file:
         save_csv(args.file, papers)
         print(f"Results saved in {args.file}")
 else:
         for paper in papers:
             print(paper)
-
+```
 if args.file:: Checks if the -f argument was provided (i.e., whether to save the results to a file).
 
 save_csv(args.file, papers): Saves the papers to a CSV file if a filename is given.
 
 else:: If no filename is provided, it prints each paper's details to the console.
+```
 if __name__ == "__main__":
     main()
-
+```
 if __name__ == "__main__":: Ensures the main function is called when the script is executed directly (not when imported as a module).
  
