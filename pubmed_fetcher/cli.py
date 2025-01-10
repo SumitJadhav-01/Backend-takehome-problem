@@ -3,14 +3,14 @@ import logging
 from pubmed_fetcher import fetch_ids, get_paper_details, save_csv
 from typing import Optional
 
-"""Set up logging configuration."""
+# Set up logging configuration
 def setup_logging(debug: bool) -> None:
     if debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
         logging.basicConfig(level=logging.INFO)
 
-    """Main entry point for the script. Handles command-line arguments."""
+# Main entry point for the script. Handles command-line arguments
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fetch papers from PubMed based on a query.")
     parser.add_argument("query", type=str, help="PubMed search query")
