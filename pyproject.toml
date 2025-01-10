@@ -1,0 +1,15 @@
+ [tool.poetry]
+name = "assingment"  # Replace with your project name
+version = "0.1.0"
+description = "A project to fetch and process PubMed papers"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.26.0"
+argparse = "^1.4.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
